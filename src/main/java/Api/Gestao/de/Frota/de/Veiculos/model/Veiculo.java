@@ -1,9 +1,9 @@
 package Api.Gestao.de.Frota.de.Veiculos.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_veiculo")
@@ -27,6 +27,10 @@ public class Veiculo {
         this.modelo = modelo;
         this.ano = ano;
     }
+
+    // Relação OneToMany com abastecimentos
+    @OneToMany(mappedBy = "veiculo", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Abastecimento> abastecimentos = new ArrayList<>();
 
     public Long getId() {
         return id;
